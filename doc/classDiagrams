@@ -1,57 +1,77 @@
 ```mermaid
 classDiagram
+    %% Các mối quan hệ (Relationships)
+    AquaticLife <|-- Fish : Inheritance
+    AquaticLife <|-- Plant : Inheritance
+    PetStoreManagement "1" *-- "many" AquaticLife : contains
+    PetStoreManagement "1" *-- "many" Order : manages
+    Order "1" o-- "many" AquaticLife : includes
+    Order "many" -- "1" Customer : placed by
+
     class AquaticLife {
-        <<abstract>>
         -String id
         -String name
-        -String species
-        +performHealthCheck()* void
+        -int age
+        -double price
+        -String speciesType
+        +AquaticLife()
+        +AquaticLife(id, name, age, price, speciesType)
+        +input() void
+        +display() void
+        +getPrice() double
+        +getId() String
+        +getName() String
     }
 
     class Fish {
         -String waterType
-        -String foodType
-        +swim() void
-        +performHealthCheck() void
+        -boolean isAggressive
+        +Fish()
+        +input() void
+        +display() void
     }
 
     class Plant {
         -String lightRequirement
-        -double growthRate
-        +performHealthCheck() void
+        -boolean carbonRequired
+        +Plant()
+        +input() void
+        +display() void
     }
 
-    class Aquarium {
+    class Customer {
         -String id
-        -double volume
-        -double temperature
-        -double phLevel
-        -List creatures
-        -List equipment
-        +addCreature(AquaticLife creature) void
-        +monitorWaterQuality() void
+        -String name
+        -String phone
+        +Customer()
+        +input() void
+        +display() void
+        +getName() String
     }
 
-    class Equipment {
-        <<interface>>
-        +turnOn() void
-        +turnOff() void
-        +getStatus() String
+    class Order {
+        -String orderId
+        -Customer customer
+        -ArrayList~AquaticLife~ itemList
+        -double totalAmount
+        +Order(orderId, customer)
+        +addItem(item: AquaticLife) void
+        +calculateTotal() void
+        +display() void
     }
 
-    class Filter {
-        -int flowRate
-        +turnOn() void
+    class PetStoreManagement {
+        -ArrayList~AquaticLife~ inventory
+        -ArrayList~Order~ orders
+        +PetStoreManagement()
+        +addItem() void
+        +removeItem() void
+        +searchByName() void
+        +displayAll() void
+        +createOrder() void
     }
 
-    class Heater {
-        -double targetTemp
-        +turnOn() void
+    class Main {
+        +main(args: String[]) void
     }
-
-    AquaticLife <|-- Fish
-    AquaticLife <|-- Plant
-    Aquarium "1" *-- "many" AquaticLife : contains
-    Aquarium "1" *-- "many" Equipment : uses
-    Equipment <|.. Filter
-    Equipment <|.. Heater
+      
