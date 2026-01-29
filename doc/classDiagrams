@@ -1,1 +1,57 @@
 
+classDiagram
+    class AquaticLife {
+        <<abstract>>
+        -String id
+        -String name
+        -String species
+        +performHealthCheck()* void
+    }
+
+    class Fish {
+        -String waterType
+        -String foodType
+        +swim() void
+        +performHealthCheck() void
+    }
+
+    class Plant {
+        -String lightRequirement
+        -double growthRate
+        +performHealthCheck() void
+    }
+
+    class Aquarium {
+        -String id
+        -double volume
+        -double temperature
+        -double phLevel
+        -List creatures
+        -List equipment
+        +addCreature(AquaticLife creature) void
+        +monitorWaterQuality() void
+    }
+
+    class Equipment {
+        <<interface>>
+        +turnOn() void
+        +turnOff() void
+        +getStatus() String
+    }
+
+    class Filter {
+        -int flowRate
+        +turnOn() void
+    }
+
+    class Heater {
+        -double targetTemp
+        +turnOn() void
+    }
+
+    AquaticLife <|-- Fish
+    AquaticLife <|-- Plant
+    Aquarium "1" *-- "many" AquaticLife : contains
+    Aquarium "1" *-- "many" Equipment : uses
+    Equipment <|.. Filter
+    Equipment <|.. Heater
