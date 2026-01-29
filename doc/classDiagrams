@@ -1,77 +1,142 @@
 ```mermaid
 classDiagram
-    %% Các mối quan hệ (Relationships)
-    AquaticLife <|-- Fish : Inheritance
-    AquaticLife <|-- Plant : Inheritance
-    PetStoreManagement "1" *-- "many" AquaticLife : contains
-    PetStoreManagement "1" *-- "many" Order : manages
-    Order "1" o-- "many" AquaticLife : includes
-    Order "many" -- "1" Customer : placed by
 
-    class AquaticLife {
-        -String id
-        -String name
-        -int age
-        -double price
-        -String speciesType
-        +AquaticLife()
-        +AquaticLife(id, name, age, price, speciesType)
-        +input() void
-        +display() void
-        +getPrice() double
-        +getId() String
-        +getName() String
-    }
+class Employee {
+  -id : String
+  -name : String
+  -age : int
+  -email : String
+  -phone : String
+  -salary : double
+  -department : String
+  -position : String
 
-    class Fish {
-        -String waterType
-        -boolean isAggressive
-        +Fish()
-        +input() void
-        +display() void
-    }
+  
 
-    class Plant {
-        -String lightRequirement
-        -boolean carbonRequired
-        +Plant()
-        +input() void
-        +display() void
-    }
+  +getId()  String
+  +setId(id : String)  void
+  +getName()  String
+  +setName(name : String)  void
+  +getAge()  int
+  +setAge(age : int)  void
+  +getEmail()  String
+  +setEmail(email : String)  void
+  +getPhone()  String
+  +setPhone(phone : String)  void
+  +getSalary()  double
+  +setSalary(salary : double)  void
+  +getDepartment()  String
+  +setDepartment(department : String)  void
+  +getPosition()  String
+  +setPosition(position : String)  void
+}
 
-    class Customer {
-        -String id
-        -String name
-        -String phone
-        +Customer()
-        +input() void
-        +display() void
-        +getName() String
-    }
+class Staff {
+ 
+ - baseSalary  double                
+ - bonus  double                     
+ - deduction  double 
+  + getBaseSalary()double            
+ + setBaseSalary(s:double)void      
+ + getBonus()double                  
+ + setBonus(b:double)void          
+ + getDeduction()double              
+ + setDeduction(d:double)void       
+ + calculateTotalSalary()double
+}
 
-    class Order {
-        -String orderId
-        -Customer customer
-        -ArrayList~AquaticLife~ itemList
-        -double totalAmount
-        +Order(orderId, customer)
-        +addItem(item: AquaticLife) void
-        +calculateTotal() void
-        +display() void
-    }
+class Manager {
+  -responsibilityAllowance : double
 
-    class PetStoreManagement {
-        -ArrayList~AquaticLife~ inventory
-        -ArrayList~Order~ orders
-        +PetStoreManagement()
-        +addItem() void
-        +removeItem() void
-        +searchByName() void
-        +displayAll() void
-        +createOrder() void
-    }
 
-    class Main {
-        +main(args: String[]) void
-    }
-      
+
+  +getResponsibilityAllowance()  double
+  +setResponsibilityAllowance(allowance : double)  void
+  +calculateAllowance()  double
+}
+
+class Department {
+  -departmentId : String
+  -departmentName : String
+  -description : String
+
+  
+
+  +getDepartmentId()  String
+  +setDepartmentId(id : String)  void
+  +getDepartmentName()  String
+  +setDepartmentName(name : String)  void
+  +getDescription()  String
+  +setDescription(desc : String)  void
+}
+
+class Position {
+  -positionId : String
+  -positionName : String
+  -allowance : double
+
+  
+
+  +getPositionId()  String
+  +setPositionId(id : String)  void
+  +getPositionName()  String
+  +setPositionName(name : String)  void
+  +getAllowance()  double
+  +setAllowance(allowance : double)  void
+}
+
+class Attendance {
+  -employeeId : String
+  -workingDays : int
+  -absentDays : int
+
+  
+
+  +getEmployeeId()  String
+  +setEmployeeId(id : String)  void
+  +getWorkingDays()  int
+  +setWorkingDays(days : int)  void
+  +getAbsentDays()  int
+  +setAbsentDays(days : int)  void
+  +getTotalDays()  int
+}
+
+class Salary {
+  -baseSalary : double
+  -bonus : double
+  -deduction : double
+
+  
+
+  +getBaseSalary()  double
+  +setBaseSalary(salary : double)  void
+  +getBonus()  double
+  +setBonus(bonus : double)  void
+  +getDeduction()  double
+  +setDeduction(deduction : double)  void
+  +calculateTotalSalary()  double
+}
+
+class Validation {
+  +isValidId(id : String)  boolean
+  +isValidName(name : String)  boolean
+  +isValidAge(age : int)  boolean
+  +isValidEmail(email : String)  boolean
+  +isValidPhone(phone : String)  boolean
+  +isValidSalary(salary : double)  boolean
+}
+
+class EmployeeManager {
+  -employees : List<Employee>
+
+  +EmployeeManager()
+  +addEmployee(e : Employee)  void
+  +updateEmployee(e : Employee)  void
+  +deleteEmployee(id : String)  void
+  +findById(id : String)  Employee
+  +displayAll()  void
+}
+
+class Main {
+  +main(args : String[])  void
+}
