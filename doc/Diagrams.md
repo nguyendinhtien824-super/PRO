@@ -1,61 +1,38 @@
 ```mermaid
 classDiagram
-    direction LR
-    
-    class Pet {
-        -String id
-        -String name
-        -int age
-        -double price
-        -String type
-        +Pet()
-        +input() void
-        +display() void
+    direction TD
+    %% Định nghĩa các lớp con (Nằm trên)
+    class Fish {
+        -finType: String
+        -isAggressive: boolean
+        +Fish()
+        +input() : void
+        +display() : void
     }
 
-    class Dog {
-        -String breed
-        -int collarSize
-        +Dog()
-        +input() void
-        +display() void
+    class AquaticPlant {
+        -lightRequirement: String
+        -growthRate: String
+        +AquaticPlant()
+        +input() : void
+        +display() : void
     }
 
-    class Cat {
-        -String breed
-        -boolean climber
-        +Cat()
-        +input() void
-        +display() void
+    %% Định nghĩa lớp cha (Nằm dưới)
+    class AquaticProduct {
+        -id: String
+        -name: String
+        -price: double
+        -waterType: String
+        +AquaticProduct()
+        +AquaticProduct(id, name, price, waterType)
+        +input() : void
+        +display() : void
+        +getPrice() : double
+        +getId() : String
+        +getName() : String
     }
 
-    class Customer {
-        -String id
-        -String name
-        -String phone
-        +Customer()
-        +input() void
-        +display() void
-    }
-
-    class Order {
-        -String orderId
-        -Customer customer
-        -List~Pet~ petList
-        +Order()
-        +addPet(Pet pet) void
-        +display() void
-    }
-
-    class PetStoreManagement {
-        -List~Pet~ pets
-        -List~Order~ orders
-        +addPet() void
-        +removePet() void
-        +searchByName() void
-    }
-
-    class Main {
-        +main(String[] args) static
-    }
-      
+    %% Mối quan hệ: Con trỏ xuống Cha (Dùng mũi tên --> để giống hình mẫu)
+    Fish --> AquaticProduct
+    AquaticPlant --> AquaticProduct
